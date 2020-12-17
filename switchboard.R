@@ -66,6 +66,24 @@ ggplot(data=d,aes(x=fto,colour=dup)) +
   NULL
 ggsave("FTO_dupvsunique.png",width=5,height=5)
 
+
+d.dedup <- d %>% 
+  filter(dup==0)
+
+d.dedup %>%
+  group_by(priorspeaker) %>%
+  summarise(fto=mean.na(fto),count=n())
+
+ggplot(data=d.dedup,aes(x=fto,colour=priorspeaker)) +
+  theme_tufte() + xlim(c(-2200,2200)) +
+  ggtitle("FTO by speaker of prior turn: other (14.789) vs self (3.925)") +
+  geom_density() + 
+  NULL
+ggsave("FTO_bypriorspeaker_deduplicated.png",width=5,height=5)
+
+
+# looking at turn-level 
+
 test <- d %>% filter(file %in% c("sw3188.eaf"))
 
 ggplot(data=test,aes(x=turn,y=fto)) +
