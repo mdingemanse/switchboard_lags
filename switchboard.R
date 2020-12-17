@@ -36,6 +36,11 @@ ds <- d %>%
 write_xlsx(d,path="transitions.xlsx")
 write_xlsx(ds,path="transitions_slimmed.xlsx")
 
+# to do: look at duplicated turns
+d.dup <- d %>% filter(dup == 1)
+write_xlsx(d.dup,path="transitions_duplicates.xlsx")
+
+
 # some quick counts and plots
 
 d %>%
